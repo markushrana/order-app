@@ -157,7 +157,7 @@ export default function MenuPage() {
             textShadow: "0 0 8px #fbbf24, 0 1px 4px #23272f80",
           }}
         >
-          ねパロかるハウス
+          ネパロかるハウス
         </div>
       </header>
       <div className={styles.container}>
