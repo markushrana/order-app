@@ -1,5 +1,5 @@
 .mcd-bg {
-  background: linear-gradient(135deg, #fffbe6 60%, #ffe4e6 100%);
+  background: linear-gradient(135deg, #23272f 60%, #2d3140 100%);
   min-height: 100vh;
 }
 
@@ -8,7 +8,7 @@
   background: none;
   max-width: 1200px;
   margin: 0 auto;
-  box-shadow: 0 4px 32px rgba(251, 191, 36, 0.08);
+  box-shadow: 0 4px 32px rgba(30, 41, 59, 0.18);
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -16,16 +16,16 @@
 .menuList {
   flex: 3;
   padding: 2.5rem 2rem 2rem 2.5rem;
-  background: #fffbe6;
+  background: #23272f;
 }
 
 .title {
   font-size: 2.2rem;
   margin-bottom: 2.5rem;
-  color: #dc2626;
+  color: #fbbf24;
   font-family: "Arial Black", "Arial", sans-serif;
   letter-spacing: 0.04em;
-  text-shadow: 0 2px 8px #fbbf24a0;
+  text-shadow: 0 2px 8px #23272f80;
 }
 
 .categoryTitle {
@@ -71,11 +71,11 @@
 .menuImage {
   border-radius: 0.75rem;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-  border: 2px solid #fbbf24;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+  border: 2px solid #444857;
   width: 160px;
   height: 100px;
-  background: #fffbe6;
+  background: #23272f;
 }
 
 .name {
@@ -106,7 +106,7 @@
 
 .comment {
   margin-top: 0.5rem;
-  color: #4b5563;
+  color: #bdbdbd;
   font-size: 0.95rem;
   text-align: center;
 }
@@ -114,7 +114,7 @@
 .separator {
   margin: 1rem 0 0.5rem 0;
   border: none;
-  border-bottom: 1px solid #fde68a;
+  border-bottom: 1px solid #444857;
   width: 80%;
 }
 
@@ -138,19 +138,19 @@
 
 .cart {
   flex: 1.2;
-  border-left: 3px solid #fbbf24;
+  border-left: 3px solid #444857;
   padding: 2.5rem 1.5rem 2rem 1.5rem;
-  background: #fffbe6;
+  background: #23272f;
   min-width: 270px;
 }
 .cartTitle {
   font-size: 1.3rem;
   margin-bottom: 1.5rem;
-  color: #dc2626;
+  color: #fbbf24;
   font-family: "Arial Black", "Arial", sans-serif;
 }
 .empty {
-  color: #6b7280;
+  color: #bdbdbd;
   font-size: 1.1rem;
   text-align: center;
 }
@@ -158,24 +158,24 @@
   display: flex;
   align-items: center;
   margin-bottom: 1.2rem;
-  background: #fff;
+  background: #2d3140;
   border-radius: 0.5rem;
   padding: 0.5rem 0.7rem;
-  box-shadow: 0 2px 8px #fbbf24a0;
-  border: 1.5px solid #fbbf24;
+  box-shadow: 0 2px 8px #23272f80;
+  border: 1.5px solid #444857;
 }
 .cartImage {
   border-radius: 0.4rem;
   object-fit: cover;
-  border: 1.5px solid #fbbf24;
+  border: 1.5px solid #444857;
   width: 60px;
   height: 40px;
-  background: #fffbe6;
+  background: #23272f;
 }
 .cartName {
   margin-left: 0.7rem;
   font-weight: bold;
-  color: #b91c1c;
+  color: #fbbf24;
 }
 .categoryTitle {
   font-size: 1.3rem;

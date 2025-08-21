@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -8,43 +8,86 @@ type MenuItem = {
   name: string;
   price: number;
   comment?: string;
-  image?: {
+  image: {
     url: string;
     width: number;
     height: number;
   };
 };
 
+const menu: MenuItem[] = [
+  {
+    id: "momo",
+    name: "モモ",
+    price: 180,
+    comment: "肉や野菜が入った蒸し餃子。",
+    image: { url: "/momo.jpg", width: 259, height: 194 },
+  },
+  {
+    id: "yomari",
+    name: "ヨマリ",
+    price: 130,
+    comment: "ゴマと黒糖入りの甘い蒸し餃子。",
+    image: { url: "/yomari.jpg", width: 259, height: 194 },
+  },
+  {
+    id: "sausage",
+    name: "ソーセージ",
+    price: 159,
+    comment: "ソース付きのグリルソーセージ。",
+    image: { url: "/sausage.jpg", width: 201, height: 251 },
+  },
+  {
+    id: "panipuri",
+    name: "パニプリ",
+    price: 100,
+    comment: "スパイシーな水とポテトが入った空洞のプーリ。",
+    image: { url: "/panipuri.jpg", width: 275, height: 183 },
+  },
+  {
+    id: "samosa",
+    name: "サモサ",
+    price: 100,
+    comment: "スパイスの効いたポテト入りのサクサクパイ。",
+    image: { url: "/samosa.jpg", width: 247, height: 204 },
+  },
+  {
+    id: "selroti",
+    name: "セルロティ",
+    price: 100,
+    comment: "ネパールの伝統的な米粉ドーナツ。",
+    image: { url: "/selroti.jpg", width: 259, height: 194 },
+  },
+  {
+    id: "chatpat",
+    name: "チャトパット",
+    price: 90,
+    comment: "スパイシーで酸味のあるストリートスナック。",
+    image: { url: "/chatpat.jpg", width: 258, height: 195 },
+  },
+  {
+    id: "papdichat",
+    name: "パパディチャット",
+    price: 90,
+    comment: "パリパリのパパドとスパイシーな具材。",
+    image: { url: "/Papdichat.jpg", width: 259, height: 194 },
+  },
+];
+
 export default function MenuPage() {
-  const [menu, setMenu] = useState<MenuItem[]>([]);
   const [cart, setCart] = useState<{ item: MenuItem; qty: number }[]>([]);
   const [showCheckout, setShowCheckout] = useState(false);
 
-  // Fetch menu from microCMS
-  useEffect(() => {
-    const apiKey =
-      process.env.NEXT_PUBLIC_MICROCMS_API_KEY || process.env.MICROCMS_API_KEY;
-    const serviceDomain =
-      process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN ||
-      process.env.MICROCMS_SERVICE_DOMAIN;
-    if (!apiKey || !serviceDomain) return;
-    fetch(`https://${serviceDomain}.microcms.io/api/v1/menu`, {
-      headers: { "X-API-KEY": apiKey },
-    })
-      .then((res) => res.json())
-      .then((data) => setMenu(data.contents || []));
-  }, []);
-
   // Add item to cart or increase quantity
-  const handleAdd = (item: MenuItem) => {
+  const handleAdd = (item: MenuItem, qty: number = 1) => {
     setCart((prev) => {
       const found = prev.find((c) => c.item.id === item.id);
       if (found) {
         return prev.map((c) =>
-          c.item.id === item.id ? { ...c, qty: c.qty + 1 } : c
+          c.item.id === item.id ? { ...c, qty: c.qty + qty } : c
         );
       } else {
-        return [...prev, { item, qty: 1 }];
+        return [...prev, { item, qty }];
       }
     });
   };
@@ -79,19 +122,43 @@ export default function MenuPage() {
       <header
         style={{
           width: "100%",
-          background: "#b91c1c",
-          color: "#fff",
-          padding: "1.5rem 0",
+          background: "linear-gradient(90deg, #23272f 60%, #2d3140 100%)",
+          padding: "2.2rem 0 1.2rem 0",
           textAlign: "center",
-          fontSize: "2.2rem",
+          fontSize: "2.7rem",
           fontWeight: "bold",
-          letterSpacing: "0.08em",
+          letterSpacing: "0.12em",
           fontFamily: "Arial Black, Arial, sans-serif",
-          boxShadow: "0 2px 8px #fbbf24a0",
-          marginBottom: "2rem",
+          boxShadow: "0 2px 24px #fbbf2490",
+          marginBottom: "2.5rem",
+          borderBottom: "4px solid #fbbf24",
         }}
       >
-        サウニ コ バッティ
+        <span
+          style={{
+            background: "linear-gradient(90deg, #ffe066 30%, #fbbf24 70%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "0 0 16px #fbbf24, 0 2px 8px #23272f80",
+            fontSize: "3.1rem",
+            letterSpacing: "0.13em",
+            padding: "0 0.2em",
+            display: "inline-block",
+          }}
+        >
+           NEP LOCAL HOUSE
+        </span>
+        <div
+          style={{
+            fontSize: "1.2rem",
+            color: "#ffe066",
+            marginTop: 8,
+            letterSpacing: "0.08em",
+            textShadow: "0 0 8px #fbbf24, 0 1px 4px #23272f80",
+          }}
+        >
+          ねパロかるハウス
+        </div>
       </header>
       <div className={styles.container}>
         {/* メニューリスト */}
@@ -239,11 +306,18 @@ export default function MenuPage() {
             <p style={{ fontWeight: "bold", marginTop: 16 }}>合計: {total}円</p>
             <button
               className={styles.addButton}
-              style={{ marginTop: 24, background: "#fbbf24", color: "#b91c1c" }}
+              style={{ marginTop: 16, background: "#dc2626", color: "#fff" }}
               onClick={() => {
                 handleCancel();
                 handleCloseCheckout();
               }}
+            >
+              キャンセル
+            </button>
+            <button
+              className={styles.addButton}
+              style={{ marginTop: 16, background: "#fbbf24", color: "#b91c1c" }}
+              onClick={handleCloseCheckout}
             >
               閉じる
             </button>
@@ -253,8 +327,8 @@ export default function MenuPage() {
       <footer
         style={{
           width: "100%",
-          background: "#fbbf24",
-          color: "#b91c1c",
+          background: "#111",
+          color: "#fff",
           padding: "1rem 0",
           textAlign: "center",
           fontSize: "1.1rem",
